@@ -8,7 +8,7 @@ import (
 
 type ProductService interface {
 	GetProducts() ([]entity.Product, error)
-	CreateProduct(name string, stock int, price float64) (*entity.Product, error)
+	CreateProduct(name string, stock int, price int64) (*entity.Product, error)
 }
 
 type productService struct {
@@ -25,7 +25,7 @@ func (s *productService) GetProducts() ([]entity.Product, error) {
 	return s.repo.FindAll()
 }
 
-func (s *productService) CreateProduct(name string, stock int, price float64) (*entity.Product, error) {
+func (s *productService) CreateProduct(name string, stock int, price int64) (*entity.Product, error) {
 
 	if name == "" {
 		return nil, errors.New("Product name is required!")
@@ -42,7 +42,7 @@ func (s *productService) CreateProduct(name string, stock int, price float64) (*
 	product := &entity.Product{
 		Name:  name,
 		Stock: stock,
-		Price: int64(price),
+		Price: price,
 	}
 
 	err := s.repo.Create(product)

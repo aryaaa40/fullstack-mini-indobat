@@ -1,7 +1,7 @@
 package routes
 
 import (
-	controller "mini-indobat-backend/handler"
+	controller "mini-indobat-backend/controller"
 	"mini-indobat-backend/repository"
 	"mini-indobat-backend/service"
 
@@ -16,9 +16,14 @@ func SetupRoutes() *gin.Engine {
 	productService := service.NewProductService(productRepo)
 	productController := controller.NewProductController(productService)
 
-	// routes
+	orderRepo := repository.NewOrderRepository()
+	orderService := service.NewOrderService(orderRepo, productRepo)
+	orderController := controller.NewOrderController(orderService)
+
 	r.GET("/products", productController.GetProducts)
 	r.POST("/products", productController.CreateProduct)
+
+	r.POST("/orders", orderController.CreateOrder)
 
 	return r
 }

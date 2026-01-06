@@ -32,9 +32,9 @@ func (c *ProductController) GetProducts(ctx *gin.Context) {
 func (c *ProductController) CreateProduct(ctx *gin.Context) {
 
 	var req struct {
-		Name  string  `json:"name"`
-		Stock int     `json:"stock"`
-		Price float64 `json:"price"`
+		Name  string `json:"name"`
+		Stock int    `json:"stock"`
+		Price int64  `json:"price"`
 	}
 
 	if err := ctx.ShouldBindJSON(&req); err != nil {
@@ -42,7 +42,7 @@ func (c *ProductController) CreateProduct(ctx *gin.Context) {
 		return
 	}
 
-	product, err := c.service.CreateProduct(req.Name, req.Stock, req.Price)
+	product, err := c.service.CreateProduct(req.Name, req.Stock, (req.Price))
 
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
