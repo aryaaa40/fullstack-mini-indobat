@@ -23,7 +23,7 @@ func SetupRoutes() *gin.Engine {
 	r.GET("/products", productController.GetProducts)
 	r.POST("/products", productController.CreateProduct)
 
-	r.POST("/orders", orderController.CreateOrder)
+	r.POST("/order", orderController.CreateOrder)
 
 	return r
 }
