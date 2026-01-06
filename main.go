@@ -4,6 +4,7 @@ import (
 	"log"
 	"mini-indobat-backend/config"
 	"mini-indobat-backend/database"
+	"mini-indobat-backend/routes"
 
 	"github.com/joho/godotenv"
 )
@@ -16,4 +17,6 @@ func main() {
 	cfg := config.LoadConfig()
 	database.ConnectDatabase(cfg)
 
+	router := routes.SetupRoutes()
+	router.Run(":8080")
 }

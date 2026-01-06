@@ -30,7 +30,7 @@ func ConnectDatabase(cfg config.Config) {
 
 	DB = db
 
-	log.Println("Database connected successfully")
+	log.Println("Database connected successfully!")
 
 	db.AutoMigrate(&entity.Product{}, &entity.Order{})
 }
