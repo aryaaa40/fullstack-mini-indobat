@@ -36,21 +36,17 @@ func (s *orderService) CreateOrder(productID uint, qty int, discount float64) (*
 
 	var order *entity.Order
 
-	// Menggunakan database.DB.Transaction adalah cara terbaik (Automatic Rollback jika error)
 	err := database.DB.Transaction(func(tx *gorm.DB) error {
 
-		// 1. 🔒 Lock baris produk agar tidak dibeli orang lain saat proses
 		product, err := s.orderRepo.GetProductForUpdate(tx, productID)
 		if err != nil {
 			return errors.New("Product not found!")
 		}
 
-		// 2. Cek Stok
 		if product.Stock < qty {
 			return errors.New("Insufficient stock!")
 		}
 
-		// 3. Kalkulasi Finansial (Urutan: Kali dulu baru bagi)
 		total := product.Price * int64(qty)
 		discountAmount := int64(float64(total) * (discount / 100))
 		totalAfterDiscount := total - discountAmount
@@ -64,7 +60,7 @@ func (s *orderService) CreateOrder(productID uint, qty int, discount float64) (*
 			ProductID:       productID,
 			Quantity:        qty,
 			DiscountPercent: discount,
-			TotalAmount:     totalAfterDiscount, // Sudah int64
+			TotalAmount:     totalAfterDiscount,
 		}
 
 		if err := s.orderRepo.CreateOrder(tx, newOrder); err != nil {
@@ -72,7 +68,7 @@ func (s *orderService) CreateOrder(productID uint, qty int, discount float64) (*
 		}
 
 		order = newOrder
-		return nil // Jika nil, GORM otomatis melakukan COMMIT
+		return nil
 	})
 
 	return order, err
