@@ -40,6 +40,32 @@ go run main.go
 
 Aplikasi akan berjalan di `http://localhost:8080`. Database akan otomatis bermigrasi saat aplikasi dijalankan pertama kali.
 
+## API Endpoints
+
+### 1. Get All Products
+`GET /products`
+
+<img width="1916" height="957" alt="Screenshot 2026-01-06 224317" src="https://github.com/user-attachments/assets/9d2e84ae-4817-4a4c-8a2d-d99cf39f51c3" />
+
+
+### 2. Create Product
+`POST /products`
+
+<img width="1907" height="912" alt="Screenshot 2026-01-06 224254" src="https://github.com/user-attachments/assets/3087ece7-2c19-4eef-b236-2c777b431bb3" />
+
+
+### 3. Create Order
+`POST /orders`
+
+<img width="1912" height="961" alt="Screenshot 2026-01-06 224826" src="https://github.com/user-attachments/assets/9d0ae7d2-1487-4d6a-b348-6661ec192c01" />
+
+
+### 4. Concurrency Test
+`Testing multiple concurrent requests`
+
+<img width="1913" height="921" alt="Screenshot 2026-01-06 224337" src="https://github.com/user-attachments/assets/519e7326-cf76-4c76-93c9-b220e2c43f25" />
+
+
 ## Tech Stack
 
 - **Go**: Programming language
