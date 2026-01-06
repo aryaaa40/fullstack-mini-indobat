@@ -1,35 +1,48 @@
-Mini Indobat Backend
+# Mini Indobat Backend
+
 Aplikasi backend sederhana untuk manajemen produk dan transaksi apotek (obat) yang dibangun menggunakan Go, Gin Gonic, dan GORM. Aplikasi ini dilengkapi dengan mekanisme Database Locking untuk menangani race condition pada saat transaksi konkuren.
 
-Fitur Utama
-Master Produk: Kelola data obat, stok, dan harga.
-- Transaksi Order: Pembelian obat dengan perhitungan diskon otomatis.
-- Concurrency Safety: Menggunakan SELECT FOR UPDATE (Row Locking) untuk mencegah stok minus saat banyak request masuk bersamaan.
-- Database Migration: Menggunakan GORM AutoMigrate.
+## Fitur Utama
 
-Persiapan Database (PostgreSQL)
-- Buat database baru dengan nama mini_indobat.
-- Pastikan PostgreSQL Anda berjalan di port default 5432.
-- Konfigurasi kredensial (username/password) akan diatur melalui file .env.
+- **Master Produk**: Kelola data obat, stok, dan harga.
+- **Transaksi Order**: Pembelian obat dengan perhitungan diskon otomatis.
+- **Concurrency Safety**: Menggunakan SELECT FOR UPDATE (Row Locking) untuk mencegah stok minus saat banyak request masuk bersamaan.
+- **Database Migration**: Menggunakan GORM AutoMigrate.
 
-Instalasi dan Konfigurasi
-Install Dependencies
-- go mod tidy
+## Persiapan Database (PostgreSQL)
 
-Konfigurasi Environment
-Buat file .env di root project dengan konfigurasi berikut:
-- DB_HOST=localhost
-- DB_PORT=5432
-- DB_USER=postgres
-- DB_PASS=arya123
-- DB_NAME=mini_indobat
+1. Buat database baru dengan nama `mini_indobat`.
+2. Pastikan PostgreSQL Anda berjalan di port default `5432`.
+3. Konfigurasi kredensial (username/password) akan diatur melalui file `.env`.
 
-Jalankan Aplikasi
-- go run main.go
-- Aplikasi akan berjalan di http://localhost:8080. Database akan otomatis bermigrasi saat aplikasi dijalankan pertama kali.
+## Instalasi dan Konfigurasi
 
-Tech Stack
-- Go: Programming language
-- Gin Gonic: Web framework
-- GORM: ORM library
-- PostgreSQL: Database
+### Install Dependencies
+```bash
+go mod tidy
+```
+
+### Konfigurasi Environment
+
+Buat file `.env` di root project dengan konfigurasi berikut:
+```env
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
+DB_PASS=arya123
+DB_NAME=mini_indobat
+```
+
+### Jalankan Aplikasi
+```bash
+go run main.go
+```
+
+Aplikasi akan berjalan di `http://localhost:8080`. Database akan otomatis bermigrasi saat aplikasi dijalankan pertama kali.
+
+## Tech Stack
+
+- **Go**: Programming language
+- **Gin Gonic**: Web framework
+- **GORM**: ORM library
+- **PostgreSQL**: Database
