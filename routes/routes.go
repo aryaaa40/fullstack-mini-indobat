@@ -5,12 +5,15 @@ import (
 	"mini-indobat-backend/repository"
 	"mini-indobat-backend/service"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func SetupRoutes() *gin.Engine {
 
 	r := gin.Default()
+
+	r.Use(cors.Default())
 
 	productRepo := repository.NewProductRepository()
 	productService := service.NewProductService(productRepo)
